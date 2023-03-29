@@ -1,37 +1,44 @@
 <!DOCTYPE html>
+<html lang="zh-Hans-CN">
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>NGINX on Railway</title>
-    <meta name="description" content="Choo Choo!" />
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArtPlayer播放器</title>
+  <style>
+    .artplayer-app {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
 
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<body>
+  <div class="artplayer-app"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  let url = params.get('url')
+  let dm = params.get('dm')
+  if(!url) {
+    url = prompt('请输入播放链接')
+  }
+  if(!dm) {
+    dm = prompt('请输入弹幕链接')
+  }
+  if(!url) {
+    alert('url不能为空，确认刷新重试！')
+    location.reload()
+  }
+  var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url,
+  });
+</script>
 
-    <link rel="stylesheet" href="/styles.css?v=1.0" />
-  </head>
-
-  <body>
-    <main>
-      <img
-        src="https://railway.app/brand/logo-light.svg"
-        alt="Railway logo"
-        class="logo"
-      />
-
-      <h1>NGINX on Railway</h1>
-
-      <p>
-        Choo Choo! This is an example of an NGINX static site running on
-        Railway.
-        <a
-          href="https://github.com/railwayapp/starters/tree/master/examples/nginx"
-          >View source</a
-        >.
-      </p>
-    </main>
-
-    <script src="/script.js"></script>
-  </body>
 </html>
